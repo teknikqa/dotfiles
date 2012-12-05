@@ -20,3 +20,24 @@ extract () {
       echo "'$1' is not a valid file!"
   fi
 }
+
+roll () {
+  if [ "$#" -ne 0 ] ; then
+    FILE="$1"
+    case "$FILE" in
+      *.tar.bz2|*.tbz2) shift && tar cjf "$FILE" $* ;;
+      *.tar.gz|*.tgz)   shift && tar czf "$FILE" $* ;;
+      *.tar)            shift && tar cf "$FILE" $* ;;
+      *.zip)            shift && zip "$FILE" $* ;;
+      *.rar)            shift && rar "$FILE" $* ;;
+      *.7z)             shift && 7zr a "$FILE" $* ;;
+      *)                echo "'$1' cannot be rolled via roll()" ;;
+    esac
+  else
+    echo "usage: roll [file] [contents]"
+  fi
+}
+
+calc () {
+  echo "$*" | bc -l
+}
