@@ -38,6 +38,31 @@ roll () {
   fi
 }
 
+pwgen () {
+  if [ "$#" -ne 2 -o -z "$(echo "$2" | grep -E '^[0-9]+$')" ] ; then
+    echo "usage: pwgen [regex] [int]"
+  else
+    echo "$(tr -dc "$1" < /dev/urandom | head -c "$2")"
+  fi
+}
+
 calc () {
   echo "$*" | bc -l
+}
+
+start() {
+  SERVICES="$@"
+  for s in $SERVICES
+  do
+    sudo service ${s} start
+  done
+}
+
+stop() {
+  SERVICES="$@"
+  for s in $SERVICES
+  do
+    sudo service ${s} stop
+  done
+  #sudo service "$1" stop
 }

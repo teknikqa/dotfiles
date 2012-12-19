@@ -3,7 +3,7 @@
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then
-	. /etc/bashrc
+      . /etc/bashrc
 fi
 
 # If not running interactively, do not do anything
@@ -48,14 +48,19 @@ force_color_prompt=yes
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 if [ -f ~/.bash_aliases ]; then
-        . ~/.bash_aliases
+      . ~/.bash_aliases
+fi
+
+# Bash functions
+if [ -f ~/.bash_functions ]; then
+      . ~/.bash_functions
 fi
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
-    . /etc/bash_completion
+      . /etc/bash_completion
 fi
 
 # Misc settings
@@ -85,5 +90,5 @@ PATH=$PATH:$HOME/Apps/android-sdks/tools:$HOME/Apps/android-sdks/platform-tools
 
 # Colored Bash prompt
 if [ -f ~/.bash_prompt ]; then
-        . ~/.bash_prompt
+      . ~/.bash_prompt
 fi
