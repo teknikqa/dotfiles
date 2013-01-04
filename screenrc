@@ -1,0 +1,7 @@
+screen -t "teknikqa" 0 
+screen -t "irssi" 1 irssi
+defscrollback 1024
+shelltitle "$ |bash"
+hardstatus alwayslastline
+hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %d/%m %{W}%c %{g}]'
+activity "%c activity -> %n%f %t^G"
