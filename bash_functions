@@ -54,7 +54,9 @@ start() {
   SERVICES="$@"
   for s in $SERVICES
   do
-    sudo service ${s} start
+    #sudo service ${s} start
+    sudo systemctl start ${s}.service
+    sudo systemctl enable ${s}.service
   done
 }
 
@@ -62,7 +64,8 @@ stop() {
   SERVICES="$@"
   for s in $SERVICES
   do
-    sudo service ${s} stop
+    #sudo service ${s} stop
+    sudo systemctl stop ${s}.service
   done
   #sudo service "$1" stop
 }
