@@ -84,3 +84,7 @@ alias vi='vim'
 
 # Start a Python Server in the current directory
 alias serve='python -m SimpleHTTPServer 8000'
+
+# MAC manipulators
+alias random_mac='sudo ifconfig wlan0 ether `openssl rand -hex 6 | sed "s/\(..\)/\1:/g; s/.$//"`'
+alias restore_mac='sudo ifconfig wlan0 ether cc:af:78:9a:e0:a7'

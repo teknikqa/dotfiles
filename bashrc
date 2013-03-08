@@ -84,7 +84,7 @@ export LESS=FRSX
 
 # User specific aliases and functions
 # Add RVM to PATH for scripting
-PATH=$HOME/Apps:$PATH:$HOME/.rvm/bin
+PATH=$PATH:$HOME/Apps:$HOME/.rvm/bin
 # Android ADB
 PATH=$PATH:$HOME/Apps/android-sdks/tools:$HOME/Apps/android-sdks/platform-tools
 
