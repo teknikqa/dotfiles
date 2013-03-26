@@ -1,8 +1,10 @@
 [color]
+    # Use colors in Git commands that are capable of colored output when outputting to the terminal
 	status = auto
 	diff = auto
 	branch = auto
 	interactive = auto
+    ui = auto
 [user]
 	name = Nick Mathew
 	email = nick@nm7.org
@@ -11,12 +13,9 @@
 [core]
 	editor = vim
 	autocrlf = false
-	excludefile = /home/nick/.gitignore
+	excludefile = $HOME/.gitignore
     # Treat spaces before tabs, lines that are indented with 8 or more spaces, and all kinds of trailing whitespace as an error
     whitespace = space-before-tab,indent-with-non-tab,trailing-space
-[color]
-    # Use colors in Git commands that are capable of colored output when outputting to the terminal
-    ui = auto
 [color "branch"]
     current = yellow reverse
     local = yellow
