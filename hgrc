@@ -1,3 +1,3 @@
 [ui]
 # Name data to appear in commits
-username = Nick Mathew <nick@nm7.org>
+username = Nick Mathew <#substitute email>
