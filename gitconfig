@@ -7,7 +7,7 @@
     ui = auto
 [user]
 	name = Nick Mathew
-	email = nick@nm7.org
+	email = #substitue email
 [push]
 	default = tracking
 [core]
