@@ -1,0 +1,507 @@
+_terminus()
+{
+    local cur script coms opts com
+    COMPREPLY=()
+    _get_comp_words_by_ref -n : cur words
+
+    # for an alias, get the real script behind it
+    if [[ $(type -t ${words[0]}) == "alias" ]]; then
+        script=$(alias ${words[0]} | sed -E "s/alias ${words[0]}='(.*)'/\1/")
+    else
+        script=${words[0]}
+    fi
+
+    # lookup for command
+    for word in ${words[@]:1}; do
+        if [[ $word != -* ]]; then
+            com=$word
+            break
+        fi
+    done
+
+    # completing for an option
+    if [[ ${cur} == --* ]] ; then
+        opts="--help --quiet --verbose --version --ansi --no-ansi --no-interaction --yes"
+
+        case "$com" in
+
+            aliases)
+            opts="${opts} --print --location"
+            ;;
+
+            art)
+            opts="${opts} "
+            ;;
+
+            help)
+            opts="${opts} --format --raw"
+            ;;
+
+            list)
+            opts="${opts} --raw --format"
+            ;;
+
+            alpha:env:metrics)
+            opts="${opts} --period --datapoints --format --fields --field"
+            ;;
+
+            auth:login)
+            opts="${opts} --machine-token --email"
+            ;;
+
+            auth:logout)
+            opts="${opts} "
+            ;;
+
+            auth:whoami)
+            opts="${opts} --format --fields --field"
+            ;;
+
+            backup:automatic:disable)
+            opts="${opts} "
+            ;;
+
+            backup:automatic:enable)
+            opts="${opts} --day"
+            ;;
+
+            backup:automatic:info)
+            opts="${opts} --format --fields --field"
+            ;;
+
+            backup:create)
+            opts="${opts} --element --keep-for"
+            ;;
+
+            backup:get)
+            opts="${opts} --file --element --to"
+            ;;
+
+            backup:info)
+            opts="${opts} --file --element --format --fields --field"
+            ;;
+
+            backup:list)
+            opts="${opts} --element --format --fields --field"
+            ;;
+
+            backup:restore)
+            opts="${opts} --file --element"
+            ;;
+
+            branch:list)
+            opts="${opts} --format --fields --field"
+            ;;
+
+            connection:info)
+            opts="${opts} --format --fields --field"
+            ;;
+
+            connection:set)
+            opts="${opts} "
+            ;;
+
+            dashboard:view)
+            opts="${opts} --print --site_env"
+            ;;
+
+            domain:add)
+            opts="${opts} "
+            ;;
+
+            domain:dns)
+            opts="${opts} --format --fields --field"
+            ;;
+
+            domain:list)
+            opts="${opts} --format --fields --field"
+            ;;
+
+            domain:lookup)
+            opts="${opts} --format --fields --field"
+            ;;
+
+            domain:remove)
+            opts="${opts} "
+            ;;
+
+            env:clear-cache)
+            opts="${opts} "
+            ;;
+
+            env:clone-content)
+            opts="${opts} --db-only --files-only"
+            ;;
+
+            env:code-log)
+            opts="${opts} --format --fields --field"
+            ;;
+
+            env:commit)
+            opts="${opts} --message --force"
+            ;;
+
+            env:deploy)
+            opts="${opts} --sync-content --note --cc --updatedb"
+            ;;
+
+            env:diffstat)
+            opts="${opts} --format --fields --field"
+            ;;
+
+            env:info)
+            opts="${opts} --format --fields --field"
+            ;;
+
+            env:list)
+            opts="${opts} --format --fields --field"
+            ;;
+
+            env:view)
+            opts="${opts} --print"
+            ;;
+
+            env:wake)
+            opts="${opts} "
+            ;;
+
+            env:wipe)
+            opts="${opts} "
+            ;;
+
+            https:info)
+            opts="${opts} --format --fields --field"
+            ;;
+
+            https:remove)
+            opts="${opts} "
+            ;;
+
+            https:set)
+            opts="${opts} --intermediate-certificate"
+            ;;
+
+            import:complete)
+            opts="${opts} "
+            ;;
+
+            import:database)
+            opts="${opts} "
+            ;;
+
+            import:files)
+            opts="${opts} "
+            ;;
+
+            import:site)
+            opts="${opts} "
+            ;;
+
+            lock:disable)
+            opts="${opts} "
+            ;;
+
+            lock:enable)
+            opts="${opts} "
+            ;;
+
+            lock:info)
+            opts="${opts} --format --fields --field"
+            ;;
+
+            machine-token:delete)
+            opts="${opts} "
+            ;;
+
+            machine-token:delete-all)
+            opts="${opts} "
+            ;;
+
+            machine-token:list)
+            opts="${opts} --format --fields --field"
+            ;;
+
+            multidev:create)
+            opts="${opts} "
+            ;;
+
+            multidev:delete)
+            opts="${opts} --delete-branch"
+            ;;
+
+            multidev:list)
+            opts="${opts} --format --fields --field"
+            ;;
+
+            multidev:merge-from-dev)
+            opts="${opts} --updatedb"
+            ;;
+
+            multidev:merge-to-dev)
+            opts="${opts} --updatedb"
+            ;;
+
+            new-relic:disable)
+            opts="${opts} "
+            ;;
+
+            new-relic:enable)
+            opts="${opts} "
+            ;;
+
+            new-relic:info)
+            opts="${opts} --format --fields --field"
+            ;;
+
+            org:list)
+            opts="${opts} --format --fields --field"
+            ;;
+
+            org:people:add)
+            opts="${opts} "
+            ;;
+
+            org:people:list)
+            opts="${opts} --format --fields --field"
+            ;;
+
+            org:people:remove)
+            opts="${opts} "
+            ;;
+
+            org:people:role)
+            opts="${opts} "
+            ;;
+
+            org:site:list)
+            opts="${opts} --tag --format --fields --field"
+            ;;
+
+            org:site:remove)
+            opts="${opts} "
+            ;;
+
+            org:upstream:list)
+            opts="${opts} --all --framework --name --format --fields --field"
+            ;;
+
+            owner:set)
+            opts="${opts} "
+            ;;
+
+            payment-method:add)
+            opts="${opts} "
+            ;;
+
+            payment-method:list)
+            opts="${opts} --format --fields --field"
+            ;;
+
+            payment-method:remove)
+            opts="${opts} "
+            ;;
+
+            quicksilver:init)
+            opts="${opts} "
+            ;;
+
+            quicksilver:install)
+            opts="${opts} "
+            ;;
+
+            quicksilver:profile)
+            opts="${opts} "
+            ;;
+
+            redis:disable)
+            opts="${opts} "
+            ;;
+
+            redis:enable)
+            opts="${opts} "
+            ;;
+
+            remote:drush)
+            opts="${opts} "
+            ;;
+
+            remote:wp)
+            opts="${opts} "
+            ;;
+
+            self:clear-cache)
+            opts="${opts} "
+            ;;
+
+            self:config:dump)
+            opts="${opts} --format"
+            ;;
+
+            self:console)
+            opts="${opts} --site_env"
+            ;;
+
+            self:info)
+            opts="${opts} --format --fields --field"
+            ;;
+
+            service-level:set)
+            opts="${opts} "
+            ;;
+
+            site:create)
+            opts="${opts} --org"
+            ;;
+
+            site:delete)
+            opts="${opts} "
+            ;;
+
+            site:info)
+            opts="${opts} --format --fields --field"
+            ;;
+
+            site:list)
+            opts="${opts} --name --org --owner --team --format --fields --field"
+            ;;
+
+            site:lookup)
+            opts="${opts} --format --fields --field"
+            ;;
+
+            site:mass-update:apply)
+            opts="${opts} --upstream --updatedb --accept-upstream --dry-run"
+            ;;
+
+            site:mass-update:list)
+            opts="${opts} --upstream --format"
+            ;;
+
+            site:org:add)
+            opts="${opts} "
+            ;;
+
+            site:org:list)
+            opts="${opts} --format --fields --field"
+            ;;
+
+            site:org:remove)
+            opts="${opts} "
+            ;;
+
+            site:team:add)
+            opts="${opts} "
+            ;;
+
+            site:team:list)
+            opts="${opts} --format --fields --field"
+            ;;
+
+            site:team:remove)
+            opts="${opts} "
+            ;;
+
+            site:team:role)
+            opts="${opts} "
+            ;;
+
+            site:upstream:clear-cache)
+            opts="${opts} "
+            ;;
+
+            site:upstream:set)
+            opts="${opts} "
+            ;;
+
+            solr:disable)
+            opts="${opts} "
+            ;;
+
+            solr:enable)
+            opts="${opts} "
+            ;;
+
+            ssh-key:add)
+            opts="${opts} "
+            ;;
+
+            ssh-key:list)
+            opts="${opts} --format --fields --field"
+            ;;
+
+            ssh-key:remove)
+            opts="${opts} "
+            ;;
+
+            tag:add)
+            opts="${opts} "
+            ;;
+
+            tag:list)
+            opts="${opts} --format"
+            ;;
+
+            tag:remove)
+            opts="${opts} "
+            ;;
+
+            upstream:info)
+            opts="${opts} --format --fields --field"
+            ;;
+
+            upstream:list)
+            opts="${opts} --all --framework --name --org --format --fields --field"
+            ;;
+
+            upstream:updates:apply)
+            opts="${opts} --updatedb --accept-upstream"
+            ;;
+
+            upstream:updates:list)
+            opts="${opts} --format --fields --field"
+            ;;
+
+            upstream:updates:status)
+            opts="${opts} "
+            ;;
+
+            workflow:info:logs)
+            opts="${opts} --id"
+            ;;
+
+            workflow:info:operations)
+            opts="${opts} --id --format --fields --field"
+            ;;
+
+            workflow:info:status)
+            opts="${opts} --id --format --fields --field"
+            ;;
+
+            workflow:list)
+            opts="${opts} --format --fields --field"
+            ;;
+
+            workflow:watch)
+            opts="${opts} --checks"
+            ;;
+
+        esac
+
+        COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
+        __ltrim_colon_completions "$cur"
+
+        return 0;
+    fi
+
+    # completing for a command
+    if [[ $cur == $com ]]; then
+        coms="aliases art help list alpha:env:metrics auth:login auth:logout auth:whoami backup:automatic:disable backup:automatic:enable backup:automatic:info backup:create backup:get backup:info backup:list backup:restore branch:list connection:info connection:set dashboard:view domain:add domain:dns domain:list domain:lookup domain:remove env:clear-cache env:clone-content env:code-log env:commit env:deploy env:diffstat env:info env:list env:view env:wake env:wipe https:info https:remove https:set import:complete import:database import:files import:site lock:disable lock:enable lock:info machine-token:delete machine-token:delete-all machine-token:list multidev:create multidev:delete multidev:list multidev:merge-from-dev multidev:merge-to-dev new-relic:disable new-relic:enable new-relic:info org:list org:people:add org:people:list org:people:remove org:people:role org:site:list org:site:remove org:upstream:list owner:set payment-method:add payment-method:list payment-method:remove quicksilver:init quicksilver:install quicksilver:profile redis:disable redis:enable remote:drush remote:wp self:clear-cache self:config:dump self:console self:info service-level:set site:create site:delete site:info site:list site:lookup site:mass-update:apply site:mass-update:list site:org:add site:org:list site:org:remove site:team:add site:team:list site:team:remove site:team:role site:upstream:clear-cache site:upstream:set solr:disable solr:enable ssh-key:add ssh-key:list ssh-key:remove tag:add tag:list tag:remove upstream:info upstream:list upstream:updates:apply upstream:updates:list upstream:updates:status workflow:info:logs workflow:info:operations workflow:info:status workflow:list workflow:watch"
+
+        COMPREPLY=($(compgen -W "${coms}" -- ${cur}))
+        __ltrim_colon_completions "$cur"
+
+        return 0
+    fi
+}
+
+complete -o default -F _terminus terminus
