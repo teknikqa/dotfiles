@@ -1,0 +1,59 @@
+[alias]
+  fum = !git pull && git fetch && git fetch upstream && git merge --commit upstream/master && git push
+
+[commit]
+  template = /Users/nickmathew/.stCommitMsg
+
+[include]
+  path = /Users/nickmathew/.config/delta/themes.gitconfig
+
+[core]
+  excludesfile = /Users/nim8/.gitignore_global
+  pager = delta
+
+[credential]
+  helper = osxkeychain
+
+[delta]
+  plus-style = "#012800" bold "#46a646"
+  minus-style = "#340001" bold "#ff5d5d"
+  syntax-theme = Monokai Extended
+  navigate = true
+
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path =
+
+[filter "media"]
+  clean = git-media-clean %f
+  smudge = git-media-smudge %f
+
+[github]
+  user = teknikqa
+  token = replace-me
+
+[interactive]
+  diffFilter = delta --color-only
+
+[merge]
+  # Include summaries of merged commits in newly created merge commit messages
+  log = true
+
+[mergetool "sourcetree"]
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+
+[push]
+  default = simple
+
+[user]
+  name = Nick Mathew
+  email = replace@email
+[init]
+  defaultBranch = main
+[diff]
+  renameLimit = 2641
+[includeIf "gitdir:~/workspace/gu-q/"]
+  path = ~/.gitconfig-work
+[includeIf "gitdir:~/workspace/personal/"]
+  path = ~/.gitconfig-personal
