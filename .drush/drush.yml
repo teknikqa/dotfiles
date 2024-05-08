@@ -1,0 +1,7 @@
+drush:
+  paths:
+    alias-path:
+      - '${env.home}/.drush/sites'
+      - '${env.home}/.drush/sites/pantheon'
+    include:
+      - '${env.home}/.drush/pantheon'

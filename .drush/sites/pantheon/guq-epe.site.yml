@@ -1,0 +1,10 @@
+'*':
+  host: appserver.${env-name}.781a276f-fe2b-4970-8908-a76a85577011.drush.in
+  paths:
+    files: files
+  uri: ${env-name}-guq-epe.pantheonsite.io
+  user: ${env-name}.781a276f-fe2b-4970-8908-a76a85577011
+  ssh:
+    options: '-p 2222 -o "AddressFamily inet"'
+    tty: false
+

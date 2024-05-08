@@ -1,0 +1,10 @@
+'*':
+  host: appserver.${env-name}.607e0001-47b9-40a0-a620-c7c362c4bc45.drush.in
+  paths:
+    files: files
+  uri: ${env-name}-cirs.pantheonsite.io
+  user: ${env-name}.607e0001-47b9-40a0-a620-c7c362c4bc45
+  ssh:
+    options: '-p 2222 -o "AddressFamily inet"'
+    tty: false
+
