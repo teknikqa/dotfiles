@@ -8,7 +8,7 @@
   path = /Users/nickmathew/.config/delta/themes.gitconfig
 
 [core]
-  excludesfile = /Users/nim8/.gitignore_global
+  excludesfile = /Users/nickmathew/.gitignore_global
   pager = delta
 
 [credential]

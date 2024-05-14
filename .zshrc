@@ -11,9 +11,9 @@ export LC_ALL=en_US.UTF-8
 export PATH="/usr/local/bin:$/usr/local/sbin:$PATH"
 export PATH="$PATH:$HOME/.composer/vendor/bin"
 
-# PHP 8.0 from shivammathur/php homebrew tap
-export PATH="/usr/local/opt/php@8.0/bin:$PATH"
-export PATH="/usr/local/opt/php@8.0/sbin:$PATH"
+# PHP 8.1  from shivammathur/php homebrew tap
+export PATH="/opt/homebrew/opt/php@8.1/bin:$PATH"
+export PATH="/opt/homebrew/opt/php@8.1/sbin:$PATH"
 
 export EDITOR='vim'
 export HOMEBREW_GITHUB_API_TOKEN="REPLACE"
@@ -22,7 +22,7 @@ export COMPOSER_MEMORY_LIMIT=-1
 export TERMINUS_HIDE_GIT_MODE_WARNING=1
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/nim8/.oh-my-zsh"
+export ZSH="/Users/nickmathew/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -133,7 +133,7 @@ source $ZSH/oh-my-zsh.sh
 
 export PATH="/usr/local/sbin:$PATH"
 
-test -e /Users/nim8/.iterm2_shell_integration.zsh && source /Users/nim8/.iterm2_shell_integration.zsh || true
+test -e /Users/nickmathew/.iterm2_shell_integration.zsh && source /Users/nickmathew/.iterm2_shell_integration.zsh || true
 
 lg()
 {
@@ -147,9 +147,12 @@ lg()
   fi
 }
 
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/local/share/zsh-history-substring-search/zsh-history-substring-search.zsh
+# Start the SSH-Agent to allow git to use the SSH key
+eval $(ssh-agent)
+
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /opt/homebrew/share/zsh-history-substring-search/zsh-history-substring-search.zsh
 
 bindkey '^[OA' history-substring-search-up
 bindkey '^[OB' history-substring-search-down
@@ -160,7 +163,9 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+export PATH="/Users/nickmathew/.rd/bin:$PATH"
+### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
+
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
-export PATH="/usr/local/opt/php@8.1/bin:$PATH"
-export PATH="/usr/local/opt/php@8.1/sbin:$PATH"
