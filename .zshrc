@@ -21,6 +21,9 @@ export TERMINUS_LANDO_TOKEN="REPLACE"
 export COMPOSER_MEMORY_LIMIT=-1
 export TERMINUS_HIDE_GIT_MODE_WARNING=1
 
+# Allow Homebrew completions.
+FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/nickmathew/.oh-my-zsh"
 
