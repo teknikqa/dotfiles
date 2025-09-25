@@ -16,8 +16,8 @@ mkdir -p "$LOG_DIR" 2>/dev/null || true
 
 # Colors (only when stdout is a tty)
 if [[ -t 1 ]]; then
-  _C_GREEN=$'\033[0;32m'
-  _C_BLUE=$'\033[0;34m'
+  _C_GREEN=$'\033[0;92m'
+  _C_BLUE=$'\033[1;94m'
   _C_YELLOW=$'\033[1;33m'
   _C_RED=$'\033[0;31m'
   _C_NC=$'\033[0m'
@@ -103,33 +103,26 @@ determine_cask_strategy() {
     enabled)
       if [[ "$sudo_touchid_configured" == "true" ]]; then
         color_echo info "Using Touch ID strategy (Touch ID enabled and configured for sudo)"
-        echo "touchid"
       else
         color_echo info "Using GUI password strategy (Touch ID enabled but not configured for sudo)"
-        echo "sudo-askpass"
       fi
       ;;
     disabled)
       if [[ -t 0 ]]; then
         color_echo info "Using prompt strategy (Touch ID disabled, running interactively)"
-        echo "prompt"
       else
         color_echo info "Using schedule strategy (Touch ID disabled, running non-interactively)"
-        echo "schedule"
       fi
       ;;
     not_available|not_supported)
       if [[ -t 0 ]]; then
         color_echo info "Using prompt strategy (No Touch ID hardware, running interactively)"
-        echo "prompt"
       else
         color_echo info "Using skip strategy (No Touch ID hardware, running non-interactively)"
-        echo "skip"
       fi
       ;;
     *)
       color_echo warn "Unable to determine Touch ID status; defaulting to skip"
-      echo "skip"
       ;;
   esac
 }
@@ -206,7 +199,7 @@ handle_cask_updates() {
   esac
 
   color_echo info "Rebuilding Open With menu..."
-  /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/Support/lsregister -kill -r -domain local -domain user || true
+  /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/Support/lsregister -r -domain local -domain user || true
   killall Finder 2>/dev/null || true
   color_echo ok "Open With menu rebuilt, Finder relaunched"
 }
@@ -463,7 +456,7 @@ setup_dry_run() {
 
 # Orchestrator using run_step to modularize execution and logging
 update_all() {
-  local commands_to_run=(node composer code omz terminus brew)
+  local commands_to_run=(node composer code omz brew)
   local total=${#commands_to_run[@]}
   local i=1
   for cmd in "${commands_to_run[@]}"; do
@@ -491,7 +484,7 @@ EOF
         exit 0
         ;;
       --list|-l)
-        echo "Available update commands: ${AVAILABLE_COMMANDS[*]}"
+        color_echo info "Available update commands: ${AVAILABLE_COMMANDS[*]}"
         exit 0
         ;;
       --verbose|-v)
