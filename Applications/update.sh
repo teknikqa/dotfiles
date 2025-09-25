@@ -17,7 +17,6 @@ mkdir -p "$LOG_DIR" 2>/dev/null || true
 # Colors (only when stdout is a tty)
 if [[ -t 1 ]]; then
   _C_GREEN=$'\033[0;92m'
-  #_C_BLUE=$'\033[0;34m'
   _C_BLUE=$'\033[1;94m'
   _C_YELLOW=$'\033[1;33m'
   _C_RED=$'\033[0;31m'
